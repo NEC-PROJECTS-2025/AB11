@@ -1,79 +1,213 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Forgery Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            text-align: center;
-            border: rgb(4, 15, 61);
+            font-family: 'Poppins', sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
         }
-
-        h1 {
-            font-size: 50px;
-            color: black;
-            text-align: center;
-            background: #65e169;
-            height: 1.5em;
-            font-style: italic;
+        nav {
+            background-color: #007bff;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-
-        h3{
-            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
         }
-
-        button , .custom-file-upload {
-            background-color: #030303;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
             text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            font-weight: bold;
-            margin: 4px 2px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #f1c40f;
+        }
+        .container {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-size: 3em;
+            font-weight: 600;
+            color: #333;
+        }
+        .section-title {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .card h3 {
+            font-size: 1.8em;
+            color: #333;
+            margin-top: 20px;
+        }
+        .card p {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.5;
+        }
+        .button {
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 6px 20px 0 rgba(15, 43, 125, 0.515), 0 6px 20px 0 rgba(189, 111, 48, 0.2);
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        .prediction-container {
+            display: inline-block;
             margin-top: 20px;
+            transition: background-color 0.3s;
         }
-
-        img {
-            max-width: 300px;
-            margin-top: 20px;
+        .button:hover {
+            background-color: #218838;
+        }
+        .flowchart img {
+            width: 100%;
+            max-width: 900px;
+            display: block;
+            margin: auto;
+        }
+        .evaluation {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
-
 <body>
-    <h1>Image Forgery detection</h1>
-    <h3> Welcome to our image forgery detection platform!</h3>
-    <h3>Choose an image to uncover its authenticity with our advanced forgery detection technology and Simply upload the image you wish to verify.</h3></br>
-    <form method="POST" enctype="multipart/form-data">
-        <label for="file" class="custom-file-upload">
-            Choose an image
-        </label>
-        <input type="file" name="file" id="file" accept="image/*">
-        <input type="submit" value="Upload Image" class="custom-file-upload">
-    </form>
 
-    {% if prediction %}
-    <div class="prediction-container">
-        <h2>Prediction:</h2>
-        <p>The uploaded image is <strong>{{ prediction }}</strong></p>
-        <img src="{{ file_path }}" alt="Uploaded Image" style="max-width: 400px;">
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Project</a></li>
+            <li><a href="#predictions">Predictions</a></li>
+            <li><a href="#metrics">Evaluation Metrics</a></li>
+            <li><a href="#flowchart">Flowchart</a></li>
+        </ul>
+    </nav>
 
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Home Section -->
+        <section id="home" class="hero">
+            <h1>Image Forgery Detection</h1>
+            <p>Discover whether an image has been altered or forged using advanced machine learning techniques.</p>
+            <a href="#predictions" class="button">Start Detection</a>
+        </section>
+
+        <!-- About Project Section -->
+        <section id="about">
+            <h2 class="section-title">About This Project</h2>
+            <div class="card">
+                <h3>Objective</h3>
+                <p>This project focuses on detecting whether an image has been tampered with, through methods like copy-move forgery, image splicing, or image synthesis. Using machine learning models, we aim to provide accurate detection for forgery detection in digital media.</p>
+            </div>
+        </section>
+
+        <!-- Predictions Section -->
+        <section id="predictions">
+            <h2 class="section-title">Predictions</h2>
+            <div class="card">
+                <h3>Upload Image for Detection</h3>
+                <form id="upload-form" action="/predict" method="post" enctype="multipart/form-data">
+                    <input type="file" id="file" name="file" accept="image/*" required>
+                    <label for="file" class="button">Choose Image</label>
+                    <button type="submit" class="button">Upload and Detect</button>
+                </form>
+                <div class="result" id="result"></div>
+            </div>
+        </section>
+
+        <!-- Evaluation Metrics Section -->
+        <section id="metrics">
+            <h2 class="section-title">Evaluation Metrics</h2>
+            <div class="evaluation">
+                <h3>Key Performance Indicators</h3>
+                <p>We evaluate the performance of the forgery detection model using several metrics:</p>
+                <ul>
+                    <li><strong>Accuracy:</strong> The overall percentage of correct predictions made by the model.</li>
+                    <li><strong>Precision:</strong> The percentage of true positive predictions out of all positive predictions.</li>
+                    <li><strong>Recall:</strong> The percentage of true positive predictions out of all actual positives.</li>
+                    <li><strong>F1-Score:</strong> The harmonic mean of precision and recall, providing a balanced measure.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Flowchart Section -->
+        <section id="flowchart">
+            <h2 class="section-title">Process Flowchart</h2>
+            <div class="flowchart">
+                <img src="flowchart.png" alt="Image Forgery Detection Flowchart">
+            </div>
+        </section>
+        
     </div>
-    {% endif %}
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Image Forgery Detection. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('upload-form');
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = result.prediction || result.error;
+        };
+    </script>
 
 </body>
 </html>
-
